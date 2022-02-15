@@ -1,0 +1,55 @@
+{% extends 'admin/change_list.html' %}
+{% block content_title %}
+    <h1> قائمة العملاء </h1>
+{% endblock %}
+{% block result_list %}
+
+<div class="results">
+    <table>
+        
+    <thead>
+      <tr>
+        <th>
+          <div class="text">
+            <a href="#">الإسم</a>
+          </div>
+        </th>
+        <th>
+          <div class="text">
+            <a href="#">الرقم القومى</a>
+          </div>
+        </th>
+        <th>
+          <div class="text">
+            <a href="#">إسم المحل</a>
+          </div>
+        </th>
+        <th> <div class="text"> <a href="#">نوع المحل</a></div></th>
+        <th> <div class="text"> <a href="#">رقم التليفون</a></div></th>
+        <th> <div class="text"> <a href="#">العنوان</a></div></th>
+        <th> <div class="text"> <a href="#">التاريخ</a></div></th>
+        <th> <div class="text"> <a href="#">الوقت</a></div></th>
+
+        
+      </tr>
+    </thead>
+    <tbody>
+      {% for data in summary %}
+      <tr class="{% cycle 'row1' 'row2' %}">
+
+        <td>{{ data.name }}</td>
+        <td>{{ data.idNo }}</td>
+        <td>{{ data.shopName }}</td>
+        <td>{{ data.shopKind }}</td>
+        <td>{{ data.phoneNo }}</td>
+        <td>{{ data.address }}</td>
+        <td>{{ data.date }}</td>
+        <td>{{ data.time }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    
+  </table>
+</div>
+{% endblock %}
+{% block pagination %}{% endblock %}

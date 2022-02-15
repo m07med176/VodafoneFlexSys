@@ -1,3 +1,5 @@
+# in project
+ropotApp/utils/driver
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

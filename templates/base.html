@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>{% block title %} قرطبة للإتصالات {% endblock %} </title>
+
+        {% include 'snippets/base_css.html' %}
+        {% block links %}{% endblock %}
+    </head>
+    <body>
+        {% include 'snippets/header.html' %}
+        <div class="wrapper d-flex align-items-stretch">
+          {% include 'snippets/sidebar.html' %}
+            <!-- Page Content  -->
+          <div id="content" class="p-4 p-md-5">
+            <!-- Container for result -->
+            <div id="success">
+              <div class="container py-3">
+                <div class="row">
+                <div class="col-md-12">
+                {% block content %}
+                {% endblock %}
+                </div><!--/col-->
+              </div><!--/row-->
+              </div><!--/container-->
+            </div>
+        </div>
+      </div>
+      {% include 'messages/crud_message.html' %}
+      {% include 'messages/loading_message.html' %}
+      {% include 'snippets/footer.html' %}
+      {% include 'snippets/base_js.html' %}
+    </body>
+</html>

@@ -1,0 +1,35 @@
+{% load static %}
+<!-- LOCAL js relative -->
+<script src="{% static 'jquery/jquery.min.js' %}"></script>
+<script src="{% static 'main/popper-min.js' %}"></script>
+<script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/fontawsome-all.min.js' %}"></script>
+<script src="{% static 'main/myjs.js' %}"></script>
+<script type="text/javascript">
+  // --------------- Start page loading ------------------\\
+
+  // Function for adding User data and removing loading animation
+  var replace_data = function(){
+      $('#success').show();
+      $('#loading').hide();    }
+
+  // AJAX call when page has loaded
+  $(document).ready(function(){
+    // datatable place here we was wotre
+      $.ajax({
+          url: '',
+          data: {
+              'name': 'FOO'
+          },
+          data_type: 'html',
+          success: function(data){
+              replace_data(data);
+          }
+          });
+          });
+
+  // --------------- End page loading ------------------\\
+
+  </script>
+{% block script %}
+{% endblock script %}
