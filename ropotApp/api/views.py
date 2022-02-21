@@ -191,7 +191,7 @@ def deleteNumber(request):
     try:
         number = request.query_params.get('number',"")
         db  = DatabaseManager()
-        t  = Thread(target=db.deleteNumber,args=(number))
+        t  = Thread(target=db.deleteNumber,args=[number])
         t.setDaemon(True)
         t.start()
         return Response({"message":f"تم حذف رقم  {number} ","status":True})

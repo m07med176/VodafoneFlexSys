@@ -52,14 +52,16 @@ class UsersMVS(viewsets.ModelViewSet):
 # region User
 # LOGIN
 class ObtainAuthTokenView(APIView):
-	authentication_classes = []
-	permission_classes = []
+	authentication_classes 	= []
+	permission_classes 		= []
 	def post(self, request):
 		phone = request.POST.get('phone')
 		password = request.POST.get('password')
+		print(phone)
+		print(password)
 		account = authenticate(phone=phone, password=password)
 		serializers = SAccountResponse(account)
-		if account:
+		if account :
 			return Response(serializers.data)
 		else:
 			return Response(serializers.errors)
