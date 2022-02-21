@@ -49,7 +49,7 @@ class DatabaseManager:
 
     def deleteNumber(self,number):
         self.modb.items.delete_one({ "number": number })
-        Notification().sendNotification("حذف",f"تم حذف رقم  {number} ")
+        # Notification().sendNotification("حذف",f"تم حذف رقم  {number} ")
         
     def updateReservation(self,phoneNumber,userNumber):
         query = { "number": phoneNumber }
