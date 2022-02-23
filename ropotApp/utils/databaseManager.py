@@ -52,8 +52,9 @@ class DatabaseManager:
         # Notification().sendNotification("حذف",f"تم حذف رقم  {number} ")
         
     def updateReservation(self,phoneNumber,userNumber):
+        dateNow = datetime.datetime.now().date()
         query = { "number": phoneNumber }
-        newvalues = { "$set": { "is_reserved": True,"user_number":userNumber} }
+        newvalues = { "$set": { "is_reserved": True,"user_number":userNumber,"dateOrder":str(dateNow)} }
 
         self.modb.items.update_one(query,newvalues)
         return  {"message":"تم حجز الرقم وجارى التحقق من صلاحيتها والتواصل معك","status":True}
@@ -104,7 +105,9 @@ class DatabaseManager:
                 "is_new":True,
                 "is_done":False,
                 "is_available":False,
+                "is_checked":False,
 
+                "dateOrder":"",
                 "dateRecord":str(dateNow),
                 "version":str(dateNow)
             }
