@@ -61,7 +61,7 @@ class DatabaseManager:
     def showNumbers(self,querry):
         # to delete page if apear
         _ = querry.pop("page") if "page" in querry.keys() else 0
-
+        order = querry.pop("order") if "order" in querry.keys() else "best"
         if "number" in querry.keys():
             querry["number"]  = querry["number"].replace('"','').replace("'","")
 
@@ -73,7 +73,7 @@ class DatabaseManager:
             querry.pop("number_regex")
 
         array = []
-        for i in self.modb.items.find(querry).sort("best", -1):
+        for i in self.modb.items.find(querry).sort(order, -1):
             i.update({"_id":""})
             array.append(i)
         return array
