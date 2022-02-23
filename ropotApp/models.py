@@ -13,7 +13,7 @@ class Area(models.Model):
         db_table = "Area"
         verbose_name = "المنطقة"
         verbose_name_plural = "المناطق"
-        ordering = ['-area_name']
+        ordering = ['area_name']
 
 class Branch(models.Model):
     branch_name = models.CharField(max_length=50,null=False,verbose_name="إسم الفرع")
@@ -26,7 +26,7 @@ class Branch(models.Model):
         db_table = "Branch"
         verbose_name = "الفرع"
         verbose_name_plural = "الفرع"
-        ordering = ['-branch_name']
+        ordering = ['branch_name']
 
 class ROR(models.Model):
     date_record = models.DateField(null=False,auto_now = True,verbose_name = "تاريخ التسجيل")
