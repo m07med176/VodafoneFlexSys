@@ -322,26 +322,26 @@ class Robot:
             # Areas
             # driver.find_elements(By.CSS_SELECTOR,self.conf.listOfAreas)
             #governments = WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR,self.conf.listOfAreas)))
-            areas = { area.text.strip():area for area in WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR,self.conf.listOfAreas))) }
+            areas = { area.text.strip():area for area in WebDriverWait(driver, 2).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR,self.conf.listOfAreas))) }
             driver.execute_script("arguments[0].click();",areas[areaSelect])
-            driver.implicitly_wait(5)
+            driver.implicitly_wait(1)
             self.insertMessage(msg="area has been selected",notify=False)
 
             # Branches
             # driver.find_elements(By.CSS_SELECTOR,self.conf.listOfBranches)
-            branches = { branch.text.strip():branch for branch in WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR,self.conf.listOfBranches))) }
+            branches = { branch.text.strip():branch for branch in WebDriverWait(driver, 2).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR,self.conf.listOfBranches))) }
             driver.execute_script("arguments[0].click();", branches[branchSelect])
-            driver.implicitly_wait(5)
+            driver.implicitly_wait(1)
             self.insertMessage(msg="branch has been selected",notify=False)
 
             # Branches
             # driver.find_elements(By.CSS_SELECTOR,self.conf.numbers)
-            numbers = [ number.text[1:] for number in WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR,self.conf.numbers))) ]
+            numbers = [ number.text[1:] for number in WebDriverWait(driver, 2).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR,self.conf.numbers))) ]
             if phoneNumber in numbers:
                 ul = driver.find_elements(By.CSS_SELECTOR,self.conf.selectNumber+f'[value="2{phoneNumber}"]')[0]
                 driver.execute_script("arguments[0].click();", ul)
                 self.goNext(driver)
-                msg = WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR,self.conf.alert)))
+                msg = WebDriverWait(driver, 2).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR,self.conf.alert)))
                 if len(msg) !=0:
                     message = msg[0].text.strip()
                     classes = msg[0].get_attribute("class")
