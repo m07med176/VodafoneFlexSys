@@ -54,7 +54,7 @@ class DatabaseManager:
     def updateReservation(self,phoneNumber,userNumber):
         dateNow = datetime.datetime.now().date()
         query = { "number": phoneNumber }
-        newvalues = { "$set": { "is_reserved": True,"user_number":userNumber,"dateOrder":str(dateNow)} }
+        newvalues = { "$set": { "is_reserved": True,"is_checked":False,"user_number":userNumber,"dateOrder":str(dateNow)} }
 
         self.modb.items.update_one(query,newvalues)
         return  {"message":"تم حجز الرقم وجارى التحقق من صلاحيتها والتواصل معك","status":True}

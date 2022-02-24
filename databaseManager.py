@@ -158,9 +158,9 @@ class DatabaseManager:
                 customer = f" accounts_data.accountno = {deviceNo} "
             else: 
                 customer = f" accounts_data.customer = '{deviceNo}' "
-            filter = "";
+            filter = ""
             if id == 0:
-                filter = "";
+                filter = ""
             elif id == 1:
                 filter = " WHERE accounts_data.date = CURRENT_DATE "
             elif id == 2:
