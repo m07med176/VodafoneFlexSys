@@ -1,5 +1,4 @@
-import requests
-import json
+import requests,json,datetime
 class Notification:
     def __init__(self):
         self.BASE = "https://fcm.googleapis.com/fcm/send"
@@ -13,7 +12,9 @@ class Notification:
         data ={
             "data":{
                 "title":title,
-                "message":message
+                "message":message,
+                "date":datetime.datetime.now().date(),
+                "time":datetime.datetime.now().time()
             },
             "to":"/topics/myTopic2"
         }

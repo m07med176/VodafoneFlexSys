@@ -55,7 +55,7 @@ class Robot:
         driver.find_elements(By.CSS_SELECTOR, self.conf.nextBtn)[0].click()
 
         try:
-            msg = WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR,self.conf.alert)))
+            msg = WebDriverWait(driver, 2).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR,self.conf.alert)))
             if len(msg) !=0:
                 if "alert-danger" in msg[0].get_attribute("class"):
                     model  = Config.objects.get(name=id_key)
@@ -64,7 +64,7 @@ class Robot:
                     self.navigateToFlex(driver,id_key)
         except Exception as e: print(e)
         self.insertMessage(msg = "تم كتابه كتابه الرقم القومى والدخول على صفحه الخطوط")
-        sleep(3)
+        driver.implicitly_wait(1)
         # ----------------------------------------- #
 
     def preparePage(self,id_key='id'):
@@ -98,7 +98,7 @@ class Robot:
     def login(self,driver):
         # load page
         driver.get(self.conf.target_login)
-        driver.implicitly_wait(7)
+        driver.implicitly_wait(2)
 
         # login
         userInput = driver.find_elements(By.CSS_SELECTOR,self.conf.userInput)
@@ -107,7 +107,7 @@ class Robot:
             driver.find_elements(By.CSS_SELECTOR,self.conf.passInput)[0].send_keys(self.password)
             driver.find_elements(By.CSS_SELECTOR,self.conf.pinInput)[0].send_keys(self.user)
             driver.find_elements(By.CSS_SELECTOR,self.conf.loginBtn)[0].click()
-            sleep(3)
+            driver.implicitly_wait(1)
             # save cookies
             self.save_cookies(driver)
         else:
@@ -185,7 +185,7 @@ class Robot:
                 for cookie in cookies:
                     driver.add_cookie(cookie)
 
-            sleep(3)
+            driver.implicitly_wait(1)
 
             driver.get(url)
             # if cookies cant login
