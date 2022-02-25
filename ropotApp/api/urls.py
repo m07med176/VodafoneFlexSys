@@ -14,6 +14,7 @@ urlpatterns = [
     path("areas/",api.getAreas),
     path("edit_area/",api.editArea),
     path("branches/<int:id>/",api.getBranches),
+    path("branches-name/<str:name>/",api.getBranchesName),
     # endregion 
 
     # region numbers
