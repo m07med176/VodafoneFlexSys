@@ -73,7 +73,7 @@ def getBranches(request,id):
 
 @api_view(['GET',])
 def getBranchesName(request,name):
-    data = Branch.objects.filter(area_area_name=name)
+    data = Branch.objects.filter(area__area_name=name)
     ser = BranchS(data,many=True)
     return Response({"data": ser.data })
 
