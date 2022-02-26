@@ -55,7 +55,7 @@ class Robot:
         driver.find_elements(By.CSS_SELECTOR, self.conf.nextBtn)[0].click()
 
         try:
-            msg = WebDriverWait(driver, 2).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR,self.conf.alert)))
+            msg = WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR,self.conf.alert)))
             if len(msg) !=0:
                 if "alert-danger" in msg[0].get_attribute("class"):
                     model  = Config.objects.get(name=id_key)
@@ -64,7 +64,7 @@ class Robot:
                     self.navigateToFlex(driver,id_key)
         except Exception as e: print(e)
         self.insertMessage(msg = "تم كتابه كتابه الرقم القومى والدخول على صفحه الخطوط")
-        driver.implicitly_wait(1)
+        sleep(3)
         # ----------------------------------------- #
 
     def preparePage(self,id_key='id'):
@@ -98,7 +98,7 @@ class Robot:
     def login(self,driver):
         # load page
         driver.get(self.conf.target_login)
-        driver.implicitly_wait(2)
+        driver.implicitly_wait(7)
 
         # login
         userInput = driver.find_elements(By.CSS_SELECTOR,self.conf.userInput)
@@ -107,7 +107,7 @@ class Robot:
             driver.find_elements(By.CSS_SELECTOR,self.conf.passInput)[0].send_keys(self.password)
             driver.find_elements(By.CSS_SELECTOR,self.conf.pinInput)[0].send_keys(self.user)
             driver.find_elements(By.CSS_SELECTOR,self.conf.loginBtn)[0].click()
-            driver.implicitly_wait(5)
+            sleep(3)
             # save cookies
             self.save_cookies(driver)
         else:
@@ -185,7 +185,7 @@ class Robot:
                 for cookie in cookies:
                     driver.add_cookie(cookie)
 
-            driver.implicitly_wait(3)
+            sleep(3)
 
             driver.get(url)
             # if cookies cant login
@@ -322,26 +322,26 @@ class Robot:
             # Areas
             # driver.find_elements(By.CSS_SELECTOR,self.conf.listOfAreas)
             #governments = WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR,self.conf.listOfAreas)))
-            areas = { area.text.strip():area for area in WebDriverWait(driver, 2).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR,self.conf.listOfAreas))) }
+            areas = { area.text.strip():area for area in WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR,self.conf.listOfAreas))) }
             driver.execute_script("arguments[0].click();",areas[areaSelect])
-            driver.implicitly_wait(1)
+            driver.implicitly_wait(5)
             self.insertMessage(msg="area has been selected",notify=False)
 
             # Branches
             # driver.find_elements(By.CSS_SELECTOR,self.conf.listOfBranches)
-            branches = { branch.text.strip():branch for branch in WebDriverWait(driver, 2).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR,self.conf.listOfBranches))) }
+            branches = { branch.text.strip():branch for branch in WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR,self.conf.listOfBranches))) }
             driver.execute_script("arguments[0].click();", branches[branchSelect])
-            driver.implicitly_wait(1)
+            driver.implicitly_wait(5)
             self.insertMessage(msg="branch has been selected",notify=False)
 
             # Branches
             # driver.find_elements(By.CSS_SELECTOR,self.conf.numbers)
-            numbers = [ number.text[1:] for number in WebDriverWait(driver, 2).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR,self.conf.numbers))) ]
+            numbers = [ number.text[1:] for number in WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR,self.conf.numbers))) ]
             if phoneNumber in numbers:
                 ul = driver.find_elements(By.CSS_SELECTOR,self.conf.selectNumber+f'[value="2{phoneNumber}"]')[0]
                 driver.execute_script("arguments[0].click();", ul)
                 self.goNext(driver)
-                msg = WebDriverWait(driver, 2).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR,self.conf.alert)))
+                msg = WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR,self.conf.alert)))
                 if len(msg) !=0:
                     message = msg[0].text.strip()
                     classes = msg[0].get_attribute("class")
