@@ -13,8 +13,8 @@ class Notification:
             "data":{
                 "title":title,
                 "message":message,
-                "date":datetime.datetime.now().date(),
-                "time":datetime.datetime.now().time()
+                "date":str(datetime.datetime.now().date()),
+                "time":str(datetime.datetime.now().time())
             },
             "to":"/topics/myTopic2"
         }
