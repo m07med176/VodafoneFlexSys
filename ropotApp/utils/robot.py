@@ -107,7 +107,7 @@ class Robot:
             driver.find_elements(By.CSS_SELECTOR,self.conf.passInput)[0].send_keys(self.password)
             driver.find_elements(By.CSS_SELECTOR,self.conf.pinInput)[0].send_keys(self.user)
             driver.find_elements(By.CSS_SELECTOR,self.conf.loginBtn)[0].click()
-            driver.implicitly_wait(1)
+            driver.implicitly_wait(5)
             # save cookies
             self.save_cookies(driver)
         else:
@@ -185,7 +185,7 @@ class Robot:
                 for cookie in cookies:
                     driver.add_cookie(cookie)
 
-            driver.implicitly_wait(1)
+            driver.implicitly_wait(3)
 
             driver.get(url)
             # if cookies cant login
