@@ -67,15 +67,15 @@ class SAccountManager(serializers.ModelSerializer):
 
     def save(self):
         account= Account(
-            email           = self.validated_data['email'],
-            username        = self.validated_data['username'],
-            area      = self.validated_data['area'],
-            phone           = self.validated_data['phone'],
-            is_superuser    = self.validated_data['is_superuser'],
-            is_admin        = self.validated_data['is_admin'],
-            is_staff        = self.validated_data['is_staff'],
-            is_active       = self.validated_data['is_active'],
-            type            = self.validated_data['type']
+            email           = self.validated_data.get('email',None),
+            username        = self.validated_data.get('username',None),
+            area            = self.validated_data.get('area',None),
+            phone           = self.validated_data.get('phone',""),
+            is_superuser    = self.validated_data.get('is_superuser',False),
+            is_admin        = self.validated_data.get('is_admin',False),
+            is_staff        = self.validated_data.get('is_staff',False),
+            is_active       = self.validated_data.get('is_active',False),
+            type            = self.validated_data.get('type',6)
         )
         password = self.validated_data['password']
         account.set_password(password)
